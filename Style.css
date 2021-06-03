@@ -1,0 +1,19 @@
+
+
+
+p {
+   color: tomato;
+   border-sytle: groove;
+   border-color: black;
+   text-align: center;
+   height: 50px;
+   width: 50px;
+   font-size: 35px;
+   padding: 50px;
+   margin: 20px;
+}
+div {
+  max-width: 2px;
+  height: 2px;
+  background-color: powderblue;
+}
