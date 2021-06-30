@@ -1,0 +1,82 @@
+.sudoku{
+    border: 3px solid black;
+    margin: auto;
+    width: 472px;
+    height: 472px;
+}
+
+.single-field{
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    display: block;
+    float: left;
+}
+
+.third-column{
+    border-right-width: 3px;
+}
+
+.third-row{
+    border-bottom-width: 3px;
+}
+
+.entry-field{
+    width: 40px;
+    height: 40px;
+    font-size: 35px;
+    text-align: center;
+    margin: 0px;
+    border: none;
+    padding: 5px
+}
+
+.entry-field:focus{
+    outline: none;
+}
+
+#reset{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 25px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+#reset:hover {opacity: 1}
+
+#example{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 25px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+#example:hover {opacity: 1}
+
+#submit{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 25px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+#submit:hover {opacity: 1}
