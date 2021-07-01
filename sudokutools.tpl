@@ -195,6 +195,17 @@
                 <a href="example"><button id="example" name="example_button" type="button">Beispiel</button></a>
                 <button id="submit" name="check_button" type="submit">Check</button>
 
+
+                % if "validity" in locals():
+                <div class="output">
+                % if validity:
+                    <p style="color: green">This Sudoku has a valid status!</p>
+
+                    % else:
+                    <p style="color: red">This Sudoku has an invalid status!<br>
+
+                    Use only Numbers and play alternating.</p>
+                % end
         </div>
         </form>
     </div>
