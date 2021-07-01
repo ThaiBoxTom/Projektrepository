@@ -66,6 +66,7 @@
 
 #example:hover {opacity: 1}
 
+
 #submit{
     background-color: #4CAF50;
     border: none;
@@ -79,4 +80,9 @@
     opacity: 0.6;
     transition: 0.3s;
 }
+
 #submit:hover {opacity: 1}
+
+.red_border {
+    border-color: red;
+}

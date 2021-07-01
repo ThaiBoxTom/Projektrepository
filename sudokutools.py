@@ -1,4 +1,5 @@
-from bottle import run, route, template, static_file
+from bottle import run, route, template, static_file, request
+from typing import List
 
 
 @route('/')
@@ -9,11 +10,6 @@ def sudokutools():
                           ["", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", ""],
                           ["", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", ""],
                           ["", "", "", "", "", "", "", "", ""]])
-
-
-@route('/static/<filename>')
-def server_static(filename):
-    return static_file(filename, root='static/')
 
 
 @route("/example")
@@ -30,22 +26,29 @@ def example():
 def check():
     grid = get_grid_from_forms(request.forms)
     validity = check_validity(grid)
-    finished = check_finished(grid)
+
     if validity:
         border_color = ""
     else:
         border_color = " red_border"
-    return template("tictactoe.tpl",
+    return template("sudokutools.tpl",
                     grid=grid,
                     validity=validity,
-                    finished=finished,
                     border_color=border_color)
 
 
+def check_validity(grid):
+    numbers = "123456789"
+    candidates = [[numbers for _ in range(0, 9)] for _ in range(0, 9)]
+    for row_index in range(9):
+        for column_index in range(9):
+            for digit in candidates[row_index][column_index]:
+                if not is_possible_in_cell(grid, row_index, column_index, int(digit)):
+                    return False
+    return True
 
 
 def get_grid_from_forms(forms):
-
     grid = [[], [], [], [], [], [], [], [], []]
 
     grid[0].append(forms.get('field01'))
@@ -137,8 +140,49 @@ def get_grid_from_forms(forms):
     grid[8].append(forms.get('field87'))
     grid[8].append(forms.get('field88'))
     grid[8].append(forms.get('field89'))
-
     return grid
+
+
+def is_present_in_row(grid: List[List[int]], row_index: int, digit: int) -> bool:
+    for c in grid[row_index]:
+        if c == digit:
+            return True
+    return False
+
+
+def is_present_in_column(grid: List[List[int]], column_index: int, digit: int) -> bool:
+    for i in range(9):
+        value = grid[i][column_index]
+        if value == digit:
+            return True
+    return False
+
+
+def is_present_in_block(grid: List[List[int]], row_index: int, column_index: int, digit: int) -> bool:
+    row_start = row_index // 3 * 3
+    column_start = column_index // 3 * 3
+    for r in range(row_start, row_start+3):
+        for c in range(column_start, column_start+3):
+            value = grid[r][c]
+            if value == digit:
+                return True
+    return False
+
+
+def is_possible_in_cell(grid: List[List[int]], row_index: int, column_index: int, digit: int) -> bool:
+    in_row = is_present_in_row(grid, row_index, digit)
+    in_column = is_present_in_column(grid, column_index, digit)
+    in_block = is_present_in_block(grid, row_index, column_index, digit)
+    if in_row or in_column or in_block:
+        return False
+    else:
+        return True
+
+
+
+@route('/static/<filename>')
+def server_static(filename):
+    return static_file(filename, root='static/')
 
 
 if __name__ == '__main__':
