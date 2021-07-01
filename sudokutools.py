@@ -12,6 +12,16 @@ def server_static(filename):
     return static_file(filename, root='static/')
 
 
+@route("/example")
+def example():
+    return template("sudokutools.tpl",
+                    grid=[["", "8", "", "", "", "", "1", "", "4"], ["1", "", "", "2", "", "", "8", "5", ""],
+                          ["", "", "", "", "4", "8", "", "9", ""], ["", "", "7", "", "3", "", "", "", "5"],
+                          ["", "3", "", "", "9", "", "", "8", ""], ["9", "", "", "", "2", "", "7", "", ""],
+                          ["", "2", "", "3", "7", "", "", "", ""], ["", "7", "5", "", "", "6", "", "", "9"],
+                          ["3", "", "1", "", "", "", "", "7", ""]])
+
+
 @route("/check", method="POST")
 def check():
     grid = get_grid_from_forms(request.forms)
